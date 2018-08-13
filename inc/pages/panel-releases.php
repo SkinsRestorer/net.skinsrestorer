@@ -136,8 +136,8 @@ function loadReleases() {
 						content += '<th>'+el.size+'</th>';
 						content += '<th>'+loopDat.timeFormat+'</th>';
 						content += '<th class="actionBtns">';
-							content += '<a class="waves-effect waves-light btn-small red dropReleaseBtn"><i class="material-icons left">delete</i></a>';
-							content += '<a class="waves-effect waves-light btn-small red darken-1 downloadReleaseBtn" href="'+loopDat.urlDownload+'"><i class="material-icons left">get_app</i></a>';
+							content += '<button class="waves-effect waves-light btn-small red dropReleaseBtn"><i class="material-icons left">delete</i></button>';
+							content += '<button class="waves-effect waves-light btn-small red darken-1 downloadReleaseBtn" href="'+loopDat.urlDownload+'"><i class="material-icons left">get_app</i></button>';
 						content += '</th>';
 					content += '</tr>';
 
@@ -152,7 +152,7 @@ function loadReleases() {
 		}
 
 
-		$('.dropReleaseBtn').click(function(event) {
+		$('button.dropReleaseBtn').click(function(event) {
 			let btn = $(this);
 			let tr = $(this).parents('tr');
 			let id = tr.attr('release');
@@ -292,11 +292,11 @@ $('#rel_form').submit(function(event) {
 	#releases table tr > th {
 		font-weight: normal;
 	}
-	#releases table tr > th a.btn-small {
+	#releases table tr > th button.btn-small {
 		padding: 0 9px;
 		margin-left: 2px;
 	}
-	#releases table tr > th a.btn-small > i {
+	#releases table tr > th button.btn-small > i {
 		margin: 0;
 	}
 
