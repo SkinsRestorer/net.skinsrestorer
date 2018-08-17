@@ -70,7 +70,7 @@ $(document).ready(function() {
 		format: 'bbcode',
 		width: '100%',
 		height: '100%',
-		resizeEnabled: false,
+		resizeEnabled: true,
 		autoExpand: true,
 		autoUpdate: true,
 		id: 'rel_content_editor',
