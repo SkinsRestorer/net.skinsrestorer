@@ -44,7 +44,8 @@
     		© 2018 Skinsrestorer.net - SkinsRestorer
     		<span class="right">
 				<a class="grey-text text-lighten-4 btn btn-flat btn-small waves-effect" target="_blank" href="https://aljaxus.eu"><i class="fas fa-code"></i> aljaxus</a>
-				<a class="grey-text text-lighten-4 btn btn-flat btn-small waves-effect" href="mailto:aljaxus.dev@gmail.com" title="Contact me via email"><i class="fas fa-envelope fa-lg"></i></a>
+				<a class="red-text text-darken-1 btn btn-flat btn-small waves-effect" href="mailto:aljaxus.dev@gmail.com" title="Contact me via email"><i class="fas fa-envelope fa-lg"></i></a>
+				<a class="grey-text text-darken-4 btn btn-flat btn-small waves-effect" href="https://github.com/LazosPlaying/net.skinsrestorer" title="GitHub repo"><i class="fab fa-github fa-lg"></i></a>
 			</span>
     	</div>
   	</div>
