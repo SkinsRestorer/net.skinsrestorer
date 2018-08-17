@@ -63,12 +63,6 @@ function loadReleases() {
 					loopDat.url = url.toLowerCase();
 				}
 				{
-					let temp1 = el.content;
-					let exp = /((https?:\/\/)?([a-z0-9\.\-]*)\.([a-z0-9]{2,9})((\s)|((\/|\?)([a-z0-9\/<>!\?\=\&]*))))/ig;
-
-					loopDat.content = temp1.replace(exp, '<a href="$1" title="$1" target="_blank">$2$3.$4</a>');
-				}
-				{
 					switch (el.type) {
 						case 'dev':
 							loopDat.getBtnColor = 'blue darken-3';
@@ -109,13 +103,13 @@ function loadReleases() {
 
 						content += '<div class="release-post">';
 							content += '<div class="release-content">';
-								content += loopDat.content;
+								content += bbcode2html(el.content);
 							content += '</div>';
 							content += '<a class="waves-effect waves-light btn-small release-btn-heightToggle" href="'+loopDat.url+'">Read more..</a>';
 						content += '</div>';
 					content += "</div>";
 				}
-				
+
 				console.log(['Release id: '+el.id, el, loopDat]);
 				maindiv.append(content);
 			});

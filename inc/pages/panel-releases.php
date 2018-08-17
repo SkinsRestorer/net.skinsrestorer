@@ -290,7 +290,8 @@ function loadReleases() {
 	});
 
 }
-
+</script>
+<script>
 $('#rel_form').submit(function(event) {
 
 	event.preventDefault();

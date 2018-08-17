@@ -82,8 +82,6 @@ if ( isset($_GET['byid']) && is_numeric($_GET['byid']) ){
 					$r['size'] = round(filesize($path) / pow(1024, $i), [0,0,2,2,3][$i]).['B','kB','MB','GB','TB'][$i];
 				}
 
-				$content = (strlen($r['content']) > 600 ? substr($r['content'], 0, 600).'...' : $r['content']);
-
 				array_push($data['releases'], array(
 					'id' => $r['id'],
 					'title' => $r['title'],
@@ -91,7 +89,7 @@ if ( isset($_GET['byid']) && is_numeric($_GET['byid']) ){
 					'type' => $r['type'],
 					'filename' => $r['filename'],
 					'uniqid' => $r['uniqid'],
-					'content' => $content,
+					'content' => $r['content'],
 					'size' => $r['size'],
 					'downloads' => $r['downloads'],
 					'time' => $r['time']
