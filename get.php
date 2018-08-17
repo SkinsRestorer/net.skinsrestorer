@@ -50,6 +50,18 @@ function fileDownload($filename='defi',$id='defi',$ver='defi',$uniqid='defi'){
 	if (!file_exists($path)){
 		printAndEnd('/!\ path given in fileDownload() is incorrect - file does not exist :'.$path);
 	} else {
+		{
+			// array_push($progress, 'File download forced - updating download statistics');
+			// INCREASE DOWNLOAD STAT
+			if ($stmt2 = $conn->prepare('UPDATE releases SET release_downloads=(release_downloads+1) WHERE release_id = ?;')) {
+				$stmt2->bind_param("s", $id);
+				$stmt2->execute();
+				$stmt2->close();
+			} else {
+				printAndEnd('/!\ Error; prepared statement failed at get.php -> Increase release download count! Please inform an administrator');
+			}
+		}
+		
 		array_push($progress, 'File exists - forcing download');
 		header('Content-Type: application/octet-stream');
 		header('Content-Disposition: attachment; filename="SkinsRestorer-'.$ver.'.jar"');
@@ -63,17 +75,6 @@ function fileDownload($filename='defi',$id='defi',$ver='defi',$uniqid='defi'){
         flush();
         readfile($path);
 
-		{
-			// array_push($progress, 'File download forced - updating download statistics');
-			// INCREASE DOWNLOAD STAT
-			if ($stmt2 = $conn->prepare('UPDATE releases SET release_downloads=(release_downloads+1) WHERE release_id = ?;')) {
-				$stmt2->bind_param("s", $id);
-				$stmt2->execute();
-				$stmt2->close();
-			} else {
-				printAndEnd('/!\ Error; prepared statement failed at get.php -> Increase release download count! Please inform an administrator');
-			}
-		}
 
 	}
 
@@ -90,7 +91,7 @@ if (isset($_GET) && !empty($_GET)){
 		if ($_GET['par1']=='latest'){
 			array_push($progress, 'parameter 1 [\'par1\'] has a value of "latest"');
 
-			if ($stmt = $conn->prepare("SELECT `release_id`, `release_version`, `release_filename`, `release_uniqid` FROM `releases` ORDER BY `release_id` DESC LIMIT 1;")) {
+			if ($stmt = $conn->prepare("SELECT `release_id`, `release_version`, `release_filename`, `release_uniqid` FROM `releases` WHERE `release_type` = 'stable' ORDER BY `release_id` DESC LIMIT 1;")) {
 				array_push($progress, array(
 					'query_latest' => array(
 						'is_success' => true,

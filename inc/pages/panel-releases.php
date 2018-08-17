@@ -40,11 +40,14 @@
 	        			<input class="file-path" type="text">
 			      	</div>
 				</div>
-				<div class="input-field col s12">
+				<div class="col s12">
+	          		<textarea id="rel_content" name="rel_content"></textarea>
+	        	</div>
+				<!-- <div class="input-field col s12">
 	          		<textarea id="rel_content" class="materialize-textarea"></textarea>
 	          		<label for="rel_content">Release content</label>
-	        	</div>
-				<div class="col s12 m12 l12 right-align">
+	        	</div> -->
+				<div class="col s12 m12 l12 right-align customFooter">
 				  	<button class="waves-effect waves-white green btn-flat white-text" submit="release_post" id="publishNewReleaseModalBtn">Publish</button>
 				</div>
 			</form>
@@ -54,11 +57,7 @@
 <script type="text/javascript">
 
 
-/*
-///////////////////////////////////////////////////////////
-///////////////////// RELEASES LOADER /////////////////////
-///////////////////////////////////////////////////////////
-*/
+
 $(document).ready(function() {
 	$('#publishNewReleaseModal').modal({
 		'startingTop': '1%',
@@ -66,10 +65,87 @@ $(document).ready(function() {
 	});
 	$('#rel_type').formSelect();
 
+	var textarea = document.getElementById('rel_content');
+	sceditor.create(textarea, {
+		format: 'bbcode',
+		width: '100%',
+		height: '100%',
+		resizeEnabled: false,
+		autoExpand: true,
+		autoUpdate: true,
+		id: 'rel_content_editor',
+		bbcodeTrim: true,
 
+		emoticons: {
+				// Emoticons to be included in the dropdown
+			    dropdown: {
+			        ':smile:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/smile.png',
+					':wink:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/wink.png',
+					':tongue:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/tongue.png',
+					':angry:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/angry.png',
+					':cheerful:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/cheerful.png',
+					':sad:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/sad.png',
+					':shocked:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/shocked.png',
+					':sick:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/sick.png',
+					':sleeping:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/sleeping.png',
+					':unsure:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/unsure.png',
+					':w00t:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/w00t.png',
+					':wassat:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/wassat.png',
+					':laughing:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/laughing.png',
+					':grin:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/grin.png'
+			    },
+			    // Emoticons to be included in the more section
+			    more: {
+			        ':alien:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/alien.png',
+			        ':blink:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/blink.png',
+					':wub:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/wub.png',
+					':angel:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/angel.png',
+					':blush:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/blush.png',
+					':cool:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/cool.png',
+					':ninja:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/ninja.png',
+					':pinch:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/pinch.png',
+					':pouty:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/pouty.png',
+					':sideways:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/sideways.png',
+					':silly:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/silly.png',
+					':whistling:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/whistling.png',
+					':heart:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/heart.png',
+					':happy:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/happy.png',
+					':getlost:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/getlost.png',
+					':ermm:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/ermm.png',
+					':dizzy:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/dizzy.png',
+					':devil:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/devil.png',
+					':cwy:': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/cwy.png'
+			    },
+			    // Emoticons that are not shown in the dropdown but will still
+			    // be converted. Can be used for things like aliases
+			    hidden: {
+					'>:(': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/angry.png',
+					'>:)': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/devil.png',
+			        ':)': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/smile.png',
+			        ';)': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/wink.png',
+					':P': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/tongue.png',
+					':D': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/grin.png',
+					':(': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/sad.png',
+					':O': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/shocked.png',
+					':o': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/shocked.png',
+					'<3': 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/emoticons/heart.png'
+			    }
+			},
+		toolbar: 'bold,italic,underline,strike|subscript,superscript|left,center,right,justify|font,size,color,removeformat,emoticon|bulletlist,orderedlist|image,youtube,email,link,unlink|source',
+
+		icons: 'material',
+		style: 'https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/minified/themes/defaultdark.min.css'
+	});
+
+	sceditor.instance(textarea).focus();
 
 	loadReleases();
 });
+/*
+///////////////////////////////////////////////////////////
+///////////////////// RELEASES LOADER /////////////////////
+///////////////////////////////////////////////////////////
+*/
 function loadReleases() {
 	$.post(
 		'/api/get/releases',
@@ -225,10 +301,10 @@ $('#rel_form').submit(function(event) {
 	rel_formData.append( 'rel_title', $('#rel_title').val() );
 	rel_formData.append( 'rel_version', $('#rel_version').val() );
 	rel_formData.append( 'rel_type', $('#rel_type').val() );
-	rel_formData.append( 'rel_content', $('#rel_content').val() );
 
 	$.ajax({
 		url: '/ajax/panel.release.post.php',
+		// url: '/devbox/debug.php',
 		type: 'POST',
 		data: rel_formData,
         processData: false,
@@ -253,7 +329,7 @@ $('#rel_form').submit(function(event) {
 			$('#rel_file').val(null);
 			$('#rel_content').val(null);
 			loadReleases();
-		} else {
+		} else if ( data.is_posted == false || data.is_posted == 'false' ) {
 			console.log("Release post - user error");
 			console.log('|_ Testing "is_correct" for all inputs');
 			console.log('|_ Setting error to ( "is_correct" = false ) inputs');
@@ -263,6 +339,9 @@ $('#rel_form').submit(function(event) {
 			(data.is_correct.rel_type || data.is_correct.rel_type == 'true' ) 		? $('#rel_type').siblings('input').addClass('valid').removeClass('invalid') : $('#rel_type').siblings('input').addClass('invalid').removeClass('valid');
 			(data.is_correct.rel_content || data.is_correct.rel_content == 'true' ) ? $('#rel_content').addClass('valid').removeClass('invalid') : $('#rel_content').addClass('invalid').removeClass('valid');
 			(data.is_correct.rel_file || data.is_correct.rel_file == 'true' ) ? $('#rel_file').parents('.file-field.input-field').find('input.file-path').addClass('valid').removeClass('invalid') : $('#rel_file').parents('.file-field.input-field').find('input.file-path').addClass('invalid').removeClass('valid');
+		} else {
+			console.log("Release post - system error");
+			console.log('|_ Expected data was not found');
 		}
 
 		console.log(data);
@@ -300,6 +379,9 @@ $('#rel_form').submit(function(event) {
 		margin: 0;
 	}
 
+	#publishNewReleaseModal {
+		max-height: unset;
+	}
 	#publishNewReleaseModal > .modal-content {
 		padding: 12px 24px 0 24px;
 	}
@@ -318,6 +400,8 @@ $('#rel_form').submit(function(event) {
 	#publishNewReleaseModal .input-field > #rel_content {
 		transition: height .1s ease-in-out;
 	}
+	#publishNewReleaseModal .customFooter {
+		margin-top: 7px;
+	}
 
 </style>
-<link rel="stylesheet" href="/src/_custom/index.releases.css">

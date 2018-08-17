@@ -114,7 +114,7 @@ function loadReleases() {
 						content += '</div>';
 					content += "</div>";
 				}
-				window.document.title = el.title+' - SkinsRestorer.net';
+
 				console.log(['Release id: '+el.id, el, loopDat]);
 				maindiv.append(content);
 

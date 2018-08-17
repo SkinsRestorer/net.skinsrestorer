@@ -104,7 +104,51 @@ $(document).ready(function() {
 									'inDuration': 230,
 									'outDuration': 300
 								});
+								{
+									let extraClass = null;
+									let icon = '';
+									if ('class' in el){
+										extraClass = ' ' + el.class;
+									}
+									if ('materialicon' in el){
+										icon = '<i class="material-icons left" style="margin-right:15px;">'+el.materialicon+'</i>';
+									} else if ('imgicon' in el) {
+										icon = '<img src="'+el.imgicon+'" style="height:22px;width:auto;margin-bottom:-7px;margin-right:15px;"/>';
+									} else if ('faicon' in el) {
+										icon = '<i class="'+el.faicon+'"></i>';
+									} else {
+										console.log('|_ Element has invalid icon value');
+										console.log(el);
+										icon = '';
+									}
+									let collapsible = '<li class="no-padding"><ul id="'+el.id+'sidebarbtn" class="collapsible collapsible-accordion '+extraClass+'"><li><a class="collapsible-header"><i class="material-icons left">'+icon+'</i>'+el.text+'<i class="material-icons right">arrow_drop_down</i></a><div class="collapsible-body"><ul>';
 
+									el.items.forEach(function(el2){
+										let extraClass2 = '';
+										let icon2 = '';
+										if ('class' in el2){
+											extraClass = ' ' + el2.class;
+										}
+										if ('materialicon' in el2){
+											icon2 = '<i class="material-icons left" style="margin-right:15px;">'+el2.materialicon+'</i>';
+										} else if ('imgicon' in el2) {
+											icon2 = '<img src="'+el2.imgicon+'" style="height:22px;width:auto;margin-bottom:-7px;margin-right:15px;"/>';
+										} else if ('faicon' in el2) {
+											icon2 = '<i class="'+el2.faicon+'"></i>';
+										} else {
+											console.log('|_ Element has invalid icon value');
+											console.log(el);
+											icon2 = '';
+										}
+										collapsible += '<li class="'+extraClass2+'"><a href="'+el2.href+'">'+icon2+el2.text+'</a></li>';
+									});
+									collapsible += '</ul></div></li></ul></li>';
+									sidebar.append(collapsible);
+									$('#'+el.id+'sidebarbtn').collapsible({
+
+									});
+
+								}
 							} else {
 								console.log('|_ Element has invalid el.element value');
 								console.log(el);

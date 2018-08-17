@@ -98,10 +98,10 @@ function loadReleases() {
 							content += '<div class="release-downloadBtn right-align col s6 m4 l3 xl3 push-s6">';
 								content += '<a href="https://skinsrestorer.net/get/'+el.id+'" class="waves-effect waves-light btn-small '+loopDat.getBtnColor+'"><i class="material-icons left" style="margin-right:4px;">get_app</i>'+el.type+'</a>';
 							content += '</div>';
-							content += '<div class="col s6 m8 l9 xl9 pull-s6">';
+							content += '<div class="col s6 m4 l8 xl9 pull-s6">';
 								content += '<span class="release-time">'+loopDat.timeNoSec+'</span><br>';
 							content += '</div>';
-							content += '<div class="col s12 m8 l3 xl3 right-align">';
+							content += '<div class="col s12 m8 l4 xl3 right-align">';
 								content += el.downloads+' downloads - Size: '+el.size;
 							content += '</div>';
 						content += '</div>';
@@ -115,7 +115,7 @@ function loadReleases() {
 						content += '</div>';
 					content += "</div>";
 				}
-
+				
 				console.log(['Release id: '+el.id, el, loopDat]);
 				maindiv.append(content);
 			});

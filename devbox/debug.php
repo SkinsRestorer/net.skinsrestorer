@@ -16,6 +16,10 @@ if ( isset($_POST) && !empty($_POST) ){
 	$statusData['post'] = $_POST;
 }
 
+if ( isset($_FILES) && !empty($_FILES) ){
+	$statusData['files'] = $_FILES;
+}
+
 
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);

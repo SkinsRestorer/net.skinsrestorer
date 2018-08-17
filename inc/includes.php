@@ -20,11 +20,11 @@ class includes{
 		<meta property="og:locale" content="en_GB" />
 
 		<!-- MAIN CSS LIBRARIES -->
-		<link type="text/css" rel="stylesheet" href="https://skinsrestorer.net/src/materialize-v1.0.0-rc.2/css/materialize.min.css"  media="screen,projection"/>
+		<link type="text/css" rel="stylesheet" href="https://static.aljaxus.eu/lib/materializecss/materialize-v1.0.0-rc.2/css/materialize.min.css"  media="screen,projection"/>
 
 		<!-- MAIN JAVASCRIPT LIBRARIES -->
-		<script type="text/javascript" src="https://skinsrestorer.net/src/jquery-3.3.1/jquery.min.js"></script>
-		<script type="text/javascript" src="https://skinsrestorer.net/src/materialize-v1.0.0-rc.2/js/materialize.min.js"></script>
+		<script type="text/javascript" src="https://static.aljaxus.eu/lib/jquery/jquery-3.3.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://static.aljaxus.eu/lib/materializecss/materialize-v1.0.0-rc.2/js/materialize.min.js"></script>
 
 		<!-- FONT LIBRARIES -->
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -44,8 +44,15 @@ class includes{
 		echo '
 		<!-- PLUGINS -->
 		<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
-		<script src="https://skinsrestorer.net/src/js-cookie/js-cookie-v2.2.0.js"></script>
-		<script src="https://skinsrestorer.net/src/prettydate/prettydate.js?dat=2018-08-01.1"></script>
+		<script src="https://static.aljaxus.eu/lib/js-cookie/js-cookie-v2.2.0.js"></script>
+		<script src="https://static.aljaxus.eu/lib/jquery-prettydate/prettydate.js"></script>
+
+		<!-- BBCODE TEXTAREA -->
+		<script src="https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/minified/sceditor.min.js"></script>
+		<script src="https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/minified/formats/bbcode.js"></script>
+		<script src="https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/minified/icons/material.js"></script>
+		<script src="https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/minified/icons/monocons.js"></script>
+		<link rel="stylesheet" href="https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/minified/themes/defaultdark.min.css" />
 		';
 		$this->googleAnalytics();
 

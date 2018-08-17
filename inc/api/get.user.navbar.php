@@ -18,15 +18,15 @@ $data = array(
 			'element' => 'a',
 			'href' => 'https://skinsrestorer.net/',
 			'materialicon' => 'home',
-			'class' => 'green darken-3',
+			'class' => 'red',
 			'text' => 'Home page'
 		),
 		array(
 			'element' => 'a',
 			'href' => 'https://skinsrestorer.net/get/latest',
 			'materialicon' => 'get_app',
-			'class' => 'red darken-1',
-			'text' => 'Download latest'
+			'class' => 'green',
+			'text' => 'Download latest stable'
 		),
 		array(
 			'element' => 'a',
@@ -115,7 +115,7 @@ if ( $userUtil->isLogedIn() ){
 			));
 		}
 
-		
+
 	$data['tabs'] = array_merge($data['tabs'], $temp1);
 } else {
 	$data['tabs'] = array_merge($data['tabs'],
