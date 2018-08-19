@@ -52,7 +52,7 @@ if ($userUtil->isLogedIn()){
 						include_once $path;
 					} else {
 						echo '<script>document.title="Page \"'.$_GET['par1'].'\" not found - Skinsrestorer panel";</script>';
-						include_once __DIR__ . '/inc/pages/error.php';
+						include_once __DIR__ . '/inc/pages/error-404.php';
 					}
 				} else {
 					echo '<script>document.title="Skinsrestorer panel";</script>';

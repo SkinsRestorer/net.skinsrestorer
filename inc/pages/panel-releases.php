@@ -1,3 +1,8 @@
+<?php
+if ($_SESSION['u_isop'] != true){
+	require_once __DIR__ . '/error-401.php';
+} else {
+?>
 <div class="card">
 	<div class="row">
 		<div class="col s12 m12 l12 right-align" style="padding: .75rem .75rem;">
@@ -361,7 +366,7 @@ $('#rel_form').submit(function(event) {
 });
 
 </script>
-<style media="screen">
+<style media="all">
 	#releases {
 		overflow-x: scroll;
 	}
@@ -406,3 +411,4 @@ $('#rel_form').submit(function(event) {
 	}
 
 </style>
+<?php } ?>
