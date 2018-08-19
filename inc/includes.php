@@ -48,11 +48,11 @@ class includes{
 		<script src="https://static.aljaxus.eu/lib/jquery-prettydate/prettydate.js"></script>
 
 		<!-- BBCODE TEXTAREA -->
-		<script src="https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/minified/sceditor.min.js"></script>
-		<script src="https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/minified/formats/bbcode.js"></script>
-		<script src="https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/minified/icons/material.js"></script>
-		<script src="https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/minified/icons/monocons.js"></script>
-		<link rel="stylesheet" href="https://static.aljaxus.eu/lib/jquery-sceditor/sceditor-2.1.3/minified/themes/defaultdark.min.css" />
+		<script src="https://static.aljaxus.eu/lib/sceditor/sceditor-2.1.3/minified/sceditor.min.js"></script>
+		<script src="https://static.aljaxus.eu/lib/sceditor/sceditor-2.1.3/minified/formats/bbcode.js"></script>
+		<script src="https://static.aljaxus.eu/lib/sceditor/sceditor-2.1.3/minified/icons/material.js"></script>
+		<script src="https://static.aljaxus.eu/lib/sceditor/sceditor-2.1.3/minified/icons/monocons.js"></script>
+		<link rel="stylesheet" href="https://static.aljaxus.eu/lib/sceditor/sceditor-2.1.3/minified/themes/defaultdark.min.css" />
 		';
 		$this->googleAnalytics();
 
