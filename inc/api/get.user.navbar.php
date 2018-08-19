@@ -1,14 +1,8 @@
 <?php
 
-$data['userdata'] = array(
-	'is_loged' => $userUtil->isLogedIn()
-);
-
 $data = array(
 	'userdata' => array(
-		'is_loged' => false,
-		'first' => null,
-		'last' => null,
+		'is_loged' => $userUtil->isLogedIn(),
 		'uid' => null,
 		'id' => null,
 		'email' => null
@@ -26,7 +20,7 @@ $data = array(
 			'href' => 'https://skinsrestorer.net/get/latest',
 			'materialicon' => 'get_app',
 			'class' => 'green',
-			'text' => 'Download latest stable'
+			'text' => 'Get latest'
 		),
 		array(
 			'element' => 'a',
@@ -70,7 +64,7 @@ if ( $userUtil->isLogedIn() ){
 			)
 		);
 
-		if ( true ) {
+		if ( $_SESSION['u_isop'] == true ) {
 			$temp1[0]['items'] = array_merge($temp1[0]['items'], array(
 				array(
 					'element' => 'a',
@@ -81,7 +75,7 @@ if ( $userUtil->isLogedIn() ){
 			));
 		}
 
-		if ( true ) {
+		if ( $_SESSION['u_isop'] == true ) {
 			$temp1[0]['items'] = array_merge($temp1[0]['items'], array(
 				array(
 					'element' => 'a',
@@ -89,6 +83,17 @@ if ( $userUtil->isLogedIn() ){
 					'materialicon' => 'bug_report',
 					'target' => '_blank',
 					'text' => 'Backend errors'
+				)
+			));
+		}
+
+		if ( $_SESSION['u_isop'] == true ) {
+			$temp1[0]['items'] = array_merge($temp1[0]['items'], array(
+				array(
+					'element' => 'a',
+					'href' => 'https://skinsrestorer.net/panel/users',
+					'materialicon' => 'supervised_user_circle',
+					'text' => 'Userlist'
 				)
 			));
 		}

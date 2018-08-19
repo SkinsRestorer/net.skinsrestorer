@@ -68,14 +68,14 @@ if ( !isset($_SESSION['u_id']) ){
 					'action_user_id' => null,
 					'action_was_success' => null
 				);
-				if ( $stmt = $conn->prepare("SELECT `user_id`, `user_uid`, `user_pwd` FROM `users` WHERE user_uid = ?") ){
+				if ( $stmt = $conn->prepare("SELECT `user_id`, `user_uid`, `user_pwd`, `user_is_op` FROM `users` WHERE user_uid = ?") ){
 
 					$stmt->bind_param("s", $uid);
 					$stmt->execute();
 					$stmt->store_result();
 					if ($stmt->num_rows == 1){
 						$statusArr['is_success']['dbselect_user'] = true;
-						$stmt->bind_result($u_id, $u_uid, $u_pwd);
+						$stmt->bind_result($u_id, $u_uid, $u_pwd, $u_isop);
 						$stmt->fetch();
 						if ( password_verify($pwd, $u_pwd) ){
 
@@ -87,6 +87,7 @@ if ( !isset($_SESSION['u_id']) ){
 
 								$_SESSION['u_id'] = $u_id;
 								$_SESSION['u_uid'] = $u_uid;
+								$_SESSION['u_isop'] = $u_isop;
 
 
 								$statusArr['is_correct']['credentials'] = true;
