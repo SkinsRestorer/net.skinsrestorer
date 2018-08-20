@@ -289,49 +289,111 @@ function renderUserTable(){
 
 			});
 
-					let el = $(this);
-					let id = el.parents('tr').attr('user');
-					let isop = ( el.prop('checked') ) ? 1 : 0;
+			$('#users').find('button.newUserBtn').on('click', function(event) {
+				event.preventDefault();
+
+				let $btn = $(this);
+
+				let $el = $btn.parents('tr');
+				let $eluid = $el.find('input.newuser_uid');
+				let $valuid = $eluid.val();
+				let $elpwd = $el.find('input.newuser_pwd');
+				let $valpwd = $elpwd.val();
+				let $elisop = $el.find('input.newuser_isop');
+				let $valisop = ( $elisop.prop('checked') ) ? 1 : 0;
+
+
+
+				let stat = {
+					uid: false,
+					pwd: false,
+					isop: false
+				};
+
+				if ( $valuid.length >= 4 ){
+					stat.uid = true;
+				} else {
+					$eluid.addClass('invalid');
+					setTimeout(function(){
+						$eluid.removeClass('invalid');
+					}, 2500);
+					M.toast({html: '<i class="material-icons">warning</i> Username must be 4+ characters long'});
+				}
+				if ( $valpwd.length >= 5 ){
+					stat.pwd = true;
+				} else {
+					$elpwd.addClass('invalid');
+					setTimeout(function(){
+						$elpwd.removeClass('invalid');
+					}, 2500);
+					M.toast({html: '<i class="material-icons">warning</i> Password must be 5+ characters long'});
+				}
+				if ( ($valisop == 1) || ($valisop == 0) ){
+					stat.isop = true;
+				} else {
+					M.toast({html: '<i class="material-icons">warning</i> Woops "isop" is not boolean <button class="btn-flat toast-action" onClick="window.location.reload()">Refresh page</button>', displayLength: 15000, activationPercent: 0.9});
+				}
+
+				if ( stat.uid==true && stat.pwd==true && stat.isop==true ){
+
+					$eluid.prop('disabled', true);
+					$elpwd.prop('disabled', true);
+					$elisop.prop('disabled', true);
+					$btn.prop('disabled', true);
 
 					$.post(
-						'/ajax/panel.user.edit.php',
+						'/ajax/panel.user.create.php',
 						{
-							u_id: id,
-							u_isop: isop,
-							edit: 'isop'
+							u_uid: $valuid,
+							u_pwd: $valpwd,
+							u_isop: $valisop
 						},
-						function(json, textStatus) {
-
-						}
+						function(data, textStatus, xhr){}
 					).done(function(data){
 						console.log("***************************************************");
-						console.log("Edit user - post success");
-						if (data.is_edited == false){
-							M.toast({html: '<i class="material-icons">warning</i>User was not edited (more info in console)'});
-							setTimeout(function(){ (isop == true) ? el.prop('checked', false) : el.prop('checked', true); }, 220);
+						console.log("Create user - post success");
+						if (data.is_success.is_created == false){
+							console.log('|_ User was not created');
+							if (data.debug.is_uidused == true){
+								console.log('|_ Username is already in use');
+								M.toast({html: '<i class="material-icons">warning</i>Username is already in use'});
+								$eluid.addClass('invalid');
+								setTimeout(function(){
+									$eluid.removeClass('invalid');
+								}, 2500);
+							}
+							console.log('|_ Removed "disabled" prop from all inputs:');
+							setTimeout(function(){
+								$eluid.prop('disabled', false);
+								$elpwd.prop('disabled', false);
+								$elisop.prop('disabled', false);
+								$btn.prop('disabled', false);
+							}, 2500);
 						} else {
-							M.toast({html: '<i class="material-icons">check</i>Updated user data',classes:'green'});
+							console.log('|_ User was created');
+							M.toast({html: '<i class="material-icons">warning</i>User successfully created', classes: 'green'});
+							setTimeout(function(){
+								console.log('|_ Re-rendering users table');
+								renderUserTable();
+							}, 2500);
 						}
 						console.log(data);
 
-					}).fail(function(data){
+					}).fail(function( data ) {
 						console.log("***************************************************");
-						console.log("Edit user - post fail");
-						console.log("|_ Setting toggle element to previous state");
-						setTimeout(function(){
-							(isop == true) ? el.prop('checked', false) : el.prop('checked', true) ;
-						}, 220);
-						console.log(data);
-						M.toast({html: '<i class="material-icons">warning</i>Unable to query data from the server'});
-
-					}).always(function(data){
+						console.log("Create user - fail");
+						M.toast({html: '<i class="material-icons">warning</i>Unable to query data from the server (more info in console)'});
+					}).always(function( data ) {
 						console.log('|_ Messages:');
 						data.debug.messages.forEach(function(el){
 							console.log('  |_ '+el);
 						});
-						console.log("Edit user - process completed");
+
+						console.log("Create user - process completed");
 					});
-				});
+				}
+
+			});
 
 		}
 
