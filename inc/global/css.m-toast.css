@@ -17,7 +17,13 @@
 	    right: 12px !important;
 	}
 }
-
-.toast > .material-icons {
-	margin-right:7px;
+.toast .toast-action {
+	margin-left: 7px !important;
+	margin-right: -20px !important;
+}
+.toast button.toast-action {
+	padding: 0 8px !important;
+}
+.toast .material-icons {
+	margin-right: 7px;
 }
