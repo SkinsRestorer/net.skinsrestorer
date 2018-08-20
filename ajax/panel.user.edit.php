@@ -26,6 +26,7 @@ $statusArr = array(
 		'messages' => array(),
 		'is_activesession' => $userUtil->isLogedIn(),
 		'is_op' => null,
+		'uid_uidisused' => null
 	)
 );
 
@@ -92,8 +93,43 @@ if ($userUtil->isLogedIn()){
 								array_push($statusArr['debug']['messages'], 'Editing: uid');
 								{
 
+									if ( $stmt = $conn->prepare("SELECT `user_id` FROM `users` WHERE user_uid = ?") ){
+										array_push($statusArr['debug']['messages'], 'Statement successfully prepared @ /ajax/panel.user.edit.php -> SELECT user FROM users WHERE uid');
+										$stmt->bind_param("s", $_POST['u_uid']);
+										if ( $stmt->execute() ){
+											array_push($statusArr['debug']['messages'], 'Statement successfully executed @ /ajax/panel.user.edit.php -> SELECT user FROM users WHERE uid');
+											$stmt->store_result();
+											if ($stmt->num_rows == 0){
+												array_push($statusArr['debug']['messages'], 'Specified UID is not in use');
+												$statusArr['debug']['uid_uidisused'] = false;
 
+												if ( $stmt = $conn->prepare("UPDATE `users` SET `user_uid` = ? WHERE user_id = ?") ){
+													array_push($statusArr['debug']['messages'], 'Statement successfully prepared @ /ajax/panel.user.edit.php -> UPDATE user SET user_uid WHERE id');
+													$stmt->bind_param("ss", $_POST['u_uid'], $_POST['u_id']);
+													if ( $stmt->execute() ){
+														array_push($statusArr['debug']['messages'], 'Statement successfully executed @ /ajax/panel.user.edit.php -> UPDATE user SET user_uid WHERE id');
+														$statusArr['is_success']['is_edited'] = true;
+													} else {
+														array_push($statusArr['debug']['messages'], '/!\ Statement failed to execute @ /ajax/panel.user.edit.php -> UPDATE user SET user_uid WHERE id');
+														(isset($stmt->error)) ? array_push($statusArr['debug']['messages'], $stmt->error) : null ;
+													}
+												} else {
+													array_push($statusArr['debug']['messages'], '/!\ Prepared statement failed @ /ajax/panel.user.edit.php -> UPDATE user SET user_uid WHERE id');
+													(isset($stmt->error)) ? array_push($statusArr['debug']['messages'], $stmt->error) : null ;
+												}
 
+											} else {
+												array_push($statusArr['debug']['messages'], '/!\ Specified UID is already in use');
+												$statusArr['debug']['uid_uidisused'] = true;
+											}
+										} else {
+											array_push($statusArr['debug']['messages'], '/!\ Statement failed to execute @ /ajax/panel.user.edit.php -> SELECT user FROM users WHERE uid');
+											(isset($stmt->error)) ? array_push($statusArr['debug']['messages'], $stmt->error) : null ;
+										}
+									} else {
+										array_push($statusArr['debug']['messages'], '/!\ Prepared statement failed @ /ajax/panel.user.edit.php -> SELECT user FROM users WHERE uid');
+										(isset($stmt->error)) ? array_push($statusArr['debug']['messages'], $stmt->error) : null ;
+									}
 								}
 //
 // END EDITING UID
