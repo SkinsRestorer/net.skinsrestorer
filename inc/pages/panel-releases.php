@@ -218,7 +218,7 @@ function loadReleases() {
 						content += '<th>'+loopDat.timeFormat+'</th>';
 						content += '<th class="actionBtns">';
 							content += '<button class="waves-effect waves-light btn-small red dropReleaseBtn"><i class="material-icons left">delete</i></button>';
-							content += '<button class="waves-effect waves-light btn-small red darken-1 downloadReleaseBtn" href="'+loopDat.urlDownload+'"><i class="material-icons left">get_app</i></button>';
+							content += '<a class="waves-effect waves-light btn-small red darken-1 downloadReleaseBtn" href="'+loopDat.urlDownload+'"><i class="material-icons left">get_app</i></a>';
 						content += '</th>';
 					content += '</tr>';
 
@@ -377,11 +377,11 @@ $('#rel_form').submit(function(event) {
 	#releases table tr > th {
 		font-weight: normal;
 	}
-	#releases table tr > th button.btn-small {
+	#releases table tr > th .btn-small {
 		padding: 0 9px;
 		margin-left: 2px;
 	}
-	#releases table tr > th button.btn-small > i {
+	#releases table tr > th .btn-small > i {
 		margin: 0;
 	}
 
