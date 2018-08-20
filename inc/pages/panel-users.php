@@ -48,8 +48,8 @@ function renderUserTable(){
 
 					content += '<tr id="user_'+el.id+'" user="'+el.id+'">';
 						content += '<th>'+el.id+'</th>';
-						content += '<th><div class="input-field"><input type="text" placeholder="'+el.uid+'" value="'+el.uid+'"></div></th>';
-						content += '<th><div class="input-field"><input type="password" placeholder="******************"></div></th>';
+						content += '<th><div class="input-field"><input class="uid" type="text" placeholder="'+el.uid+'" value="'+el.uid+'"></div></th>';
+						content += '<th><div class="input-field"><input class="pwd" type="password" placeholder="******************"></div></th>';
 						content += '<th><div class="switch"><label>deop<input class="user_isop" '+(( el.isop == 1 ) ? 'checked' : '' )+' type="checkbox"><span class="lever"></span>op</label></div></th>';
 						content += '<th class="actionBtns">';
 							content += '<button class="waves-effect waves-light btn-small red dropUserBtn"><i class="material-icons left">delete</i></button>';
@@ -61,6 +61,16 @@ function renderUserTable(){
 				console.log(['Release id: '+el.id, el, loopDat]);
 
 			});
+
+			content += '<tr id="user_new" user="new">';
+				content += '<th>#</th>';
+				content += '<th><div class="input-field"><input class="newuser_uid" type="text" placeholder="Username"></div></th>';
+				content += '<th><div class="input-field"><input class="newuser_pwd" type="password" placeholder="******************"></div></th>';
+				content += '<th><div class="switch"><label>deop<input class="newuser_isop" type="checkbox"><span class="lever"></span>op</label></div></th>';
+				content += '<th class="actionBtns">';
+					content += '<button class="waves-effect waves-light btn-small green newUserBtn"><i class="material-icons left">person_add</i></button>';
+				content += '</th>';
+			content += '</tr>';
 
 			content += '</tbody></table>';
 			maindiv.append(content);
