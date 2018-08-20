@@ -234,18 +234,60 @@ function renderUserTable(){
 				}
 
 			});
-						});
-					} else if ( !selState ){
-						btn.removeClass('selectedNo');
-						btn.addClass('selectedYes');
-						btn.html('DELETE');
-					} else {
-						console.log("/!\\ Error on selState - expected boolean");
-						console.log(selState);
-					}
-				});
 
-				$('input.user_isop').change(function(event){
+			$('#users').find('input.uid').on('focusout', function(event) {
+				event.preventDefault();
+
+				let $this = $(this);
+				let $uid = $this.val();
+				let id = $this.parents('tr').attr('user');
+
+				if ($uid != $this.attr('placeholder')){
+					if ( ($uid.length >= 4) ){
+
+						$.post(
+							'/ajax/panel.user.edit.php',
+							{
+								u_id: id,
+								u_uid: $uid,
+								edit: 'uid'
+							},
+							function(data, textStatus, xhr){}
+						).done(function(data){
+							console.log("***************************************************");
+							console.log("Edit user - post success");
+							if (data.is_success.is_edited == false){
+								if (data.debug.uid_uidisused == true){
+									M.toast({html: '<i class="material-icons">warning</i>Username already in use'});
+								} else {
+									M.toast({html: '<i class="material-icons">warning</i>User was not edited (more info in console)'});
+								}
+								$this.removeClass('valid').addClass('invalid');
+							} else {
+								M.toast({html: '<i class="material-icons">check</i>Updated user data',classes:'green'});
+								$this.removeClass('invalid').addClass('valid').attr('disabled', true).attr('placeholder', $uid);
+								setTimeout(function(){ $this.removeClass('valid').attr('disabled', false); }, 2500);
+							}
+							console.log(data);
+
+						}).fail(function( data ) {
+							console.log("***************************************************");
+							console.log("Edit user - fail");
+							M.toast({html: '<i class="material-icons">warning</i>Unable to query data from the server'});
+						}).always(function( data ) {
+							console.log('|_ Messages:');
+							data.debug.messages.forEach(function(el){
+								console.log('  |_ '+el);
+							});
+							console.log("Edit user - process completed");
+						});
+
+					} else {
+						M.toast({html: '<i class="material-icons">warning</i> Username must be 4+ characters long'});
+					}
+				}
+
+			});
 
 					let el = $(this);
 					let id = el.parents('tr').attr('user');
