@@ -76,19 +76,68 @@ function renderUserTable(){
 			maindiv.append(content);
 		}
 
-
 		{
-				$('button.dropUserBtn').click(function(event) {
-					let btn = $(this);
-					let id = btn.parents('tr').attr('id');
-					let selState = btn.hasClass('selectedYes');
 
-					if ( selState ){
+			$('#users').find('button.dropUserBtn').click(function(event) {
+				let btn = $(this);
+				let id = btn.parents('tr').attr('user');
+				let selState = btn.hasClass('selectedYes');
 
-						btn.html('<i class="material-icons left">delete</i>');
-						btn.attr('disabled', true);
-						btn.addClass('selectedNo');
-						btn.removeClass('selectedYes');
+				if ( selState ){
+					console.log("***************************************************");
+
+					btn.html('<i class="material-icons left">delete</i>');
+					btn.attr('disabled', true);
+					btn.addClass('selectedNo');
+					btn.removeClass('selectedYes');
+
+					$.post(
+						'/ajax/panel.user.delete.php',
+						{
+							u_id: id
+						},
+						function(json, textStatus) {
+
+						}
+					).done(function(data){
+						console.log("Delete user - post success");
+						console.log(data);
+
+						if (data.is_success.is_deleted == true){
+							M.toast({html: '<i class="material-icons">warning</i> User was successfully deleted', classes: 'green'});
+							renderUserTable();
+						} else {
+							if (data.debug.deleting_self == true){
+								M.toast({html: '<i class="material-icons">warning</i> You can not delete yourself', classes: 'red'});
+							} else {
+								M.toast({html: '<i class="material-icons">warning</i> User could not be deleted'});
+							}
+						}
+
+					}).fail(function(data){
+						console.log("Delete user - post fail");
+						console.log(data);
+						M.toast({html: '<i class="material-icons">warning</i>Unable to query data from the server'});
+
+					}).always(function(data){
+						console.log('|_ Messages:');
+						data.debug.messages.forEach(function(el){
+							console.log('  |_ '+el);
+						});
+						setTimeout(function(){
+							btn.attr('disabled', false);
+						}, 2500);
+						console.log("Delete user - process completed");
+					});
+				} else if ( !selState ){
+					btn.removeClass('selectedNo');
+					btn.addClass('selectedYes');
+					btn.html('DELETE');
+				} else {
+					console.log("/!\\ Error on selState - expected boolean");
+					console.log(selState);
+				}
+			});
 
 						$.post(
 							'/ajax/panel.user.delete.php',
