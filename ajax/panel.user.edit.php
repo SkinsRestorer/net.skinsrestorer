@@ -25,19 +25,19 @@ $statusArr = array(
 		'post' => null,
 		'messages' => array(),
 		'is_activesession' => $userUtil->isLogedIn(),
-		'is_op' => null
+		'is_op' => null,
 	)
 );
 
 if (isset($_POST) && !empty($_POST)){
-	$statusArr['isset']['post'] = true;
+	$statusArr['is_set']['post'] = true;
 	$statusArr['debug']['post'] = $_POST;
 	foreach ($_POST as $key => $value) {
 		$statusArr['vals'][$key] = $value;
 	}
 }
 if (isset($_GET) && !empty($_GET)){
-	$statusArr['isset']['get'] = true;
+	$statusArr['is_set']['get'] = true;
 	$statusArr['debug']['get'] = $_GET;
 	foreach ($_GET as $key => $value) {
 		$statusArr['vals'][$key] = $value;
