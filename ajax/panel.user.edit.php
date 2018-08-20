@@ -77,11 +77,11 @@ if ($userUtil->isLogedIn()){
 											$statusArr['is_success']['is_edited'] = true;
 										} else {
 											array_push($statusArr['debug']['messages'], '/!\ Statement failed to execute @ /ajax/panel.user.edit.php -> UPDATE user SET user_is_op WHERE id');
-											array_push($statusArr['debug']['messages'], $stmt->error);
+											(isset($stmt->error)) ? array_push($statusArr['debug']['messages'], $stmt->error) : null ;
 										}
 									} else {
 										array_push($statusArr['debug']['messages'], '/!\ Prepared statement failed @ /ajax/panel.user.edit.php -> UPDATE user SET user_is_op WHERE id');
-										array_push($statusArr['debug']['messages'], $stmt->error);
+										(isset($stmt->error)) ? array_push($statusArr['debug']['messages'], $stmt->error) : null ;
 									}
 								}
 //
