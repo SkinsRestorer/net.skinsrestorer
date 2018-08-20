@@ -139,6 +139,51 @@ function renderUserTable(){
 				}
 			});
 
+			$('input.user_isop').change(function(event){
+
+				let el = $(this);
+				let id = el.parents('tr').attr('user');
+				let isop = ( el.prop('checked') ) ? 1 : 0;
+
+				$.post(
+					'/ajax/panel.user.edit.php',
+					{
+						u_id: id,
+						u_isop: isop,
+						edit: 'isop'
+					},
+					function(json, textStatus) {
+
+					}
+				).done(function(data){
+					console.log("***************************************************");
+					console.log("Edit user - post success");
+					if (data.is_success.is_edited == false){
+						M.toast({html: '<i class="material-icons">warning</i>User was not edited (more info in console)'});
+						setTimeout(function(){ (isop == true) ? el.prop('checked', false) : el.prop('checked', true); }, 220);
+					} else {
+						M.toast({html: '<i class="material-icons">check</i>Updated user data',classes:'green'});
+					}
+					console.log(data);
+
+				}).fail(function(data){
+					console.log("***************************************************");
+					console.log("Edit user - post fail");
+					console.log("|_ Setting toggle element to previous state");
+					setTimeout(function(){
+						(isop == true) ? el.prop('checked', false) : el.prop('checked', true) ;
+					}, 220);
+					console.log(data);
+					M.toast({html: '<i class="material-icons">warning</i>Unable to query data from the server'});
+
+				}).always(function(data){
+					console.log('|_ Messages:');
+					data.debug.messages.forEach(function(el){
+						console.log('  |_ '+el);
+					});
+					console.log("Edit user - process completed");
+				});
+			});
 						$.post(
 							'/ajax/panel.user.delete.php',
 							{
