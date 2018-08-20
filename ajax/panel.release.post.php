@@ -208,7 +208,7 @@ if ( $userUtil->isLogedIn() ){
 								Header('Content-type: application/json');
 								die(json_encode(array(
 									'error'=>'Statement execution failed at user.login.php -> insert($releaseData, "releases") -> statement->execute ! The "rows_affected" does not equal to 1 ! Please inform the administrator.',
-									'message'=>$stmt->error
+									'message'=> (isset($stmt->error)) ? $stmt->error : null
 								), JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));
 							}
 						} else {
@@ -217,7 +217,7 @@ if ( $userUtil->isLogedIn() ){
 							Header('Content-type: application/json');
 							die(json_encode(array(
 								'error'=>'prepared statement failed at panel.release.post.php -> insert($releaseData, "releases") -> statement->prepare ! Please inform the administrator.',
-								'message'=>$stmt->error
+								'message'=> (isset($stmt->error)) ? $stmt->error : null
 							), JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));
 						}
 
@@ -226,8 +226,7 @@ if ( $userUtil->isLogedIn() ){
 						// Prepared statement failed
 						Header('Content-type: application/json');
 						die(json_encode(array(
-							'error'=>'Something went wrong at user.login.php -> move_uploaded_file() ! Please inform the administrator.',
-							'message'=>$stmt->error
+							'error'=>'Something went wrong at user.login.php -> move_uploaded_file() ! Please inform the administrator.'
 						), JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));
 					}
 
@@ -242,7 +241,7 @@ if ( $userUtil->isLogedIn() ){
 					Header('Content-type: application/json');
 					die(json_encode(array(
 						'error'=>'prepared statement failed at panel.release.post.php -> insert($actionsarr, "users_actions") -> statement->prepare ! Please inform the administrator.',
-						'message'=>$stmt->error
+						'message'=> (isset($stmt->error)) ? $stmt->error : null
 					), JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));
 				}
 
