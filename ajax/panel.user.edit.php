@@ -198,11 +198,11 @@ if ($userUtil->isLogedIn()){
 						}
 					} else {
 						array_push($statusArr['debug']['messages'], '/!\ Statement failed to execute @ /ajax/panel.user.edit.php -> SELECT user FROM users WHERE id');
-						array_push($statusArr['debug']['messages'], $stmt->error);
+						(isset($stmt->error)) ? array_push($statusArr['debug']['messages'], $stmt->error) : null ;
 					}
 				} else {
 					array_push($statusArr['debug']['messages'], '/!\ Prepared statement failed @ /ajax/panel.user.edit.php -> SELECT user FROM users WHERE id');
-					array_push($statusArr['debug']['messages'], $stmt->error);
+					(isset($stmt->error)) ? array_push($statusArr['debug']['messages'], $stmt->error) : null ;
 				}
 			} else {
 				array_push($statusArr['debug']['messages'], '/!\ User id is missing');
