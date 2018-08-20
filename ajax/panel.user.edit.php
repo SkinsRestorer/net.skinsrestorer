@@ -169,19 +169,26 @@ if ($userUtil->isLogedIn()){
 //
 // START LOG USER ACTION
 //
-							if ( $stmt = $conn->prepare("INSERT INTO `users_actions` (`action_user_id`, `action_action`, `action_time`, `action_ip`, `action_was_succes`) VALUES (?, ?, ?, ?, ?);")){
+							if ( $stmt = $conn->prepare("INSERT INTO `users_actions` (`action_user_id`, `action_action`, `action_time`, `action_ip`, `action_was_success`) VALUES (?, ?, ?, ?, ?);")){
 								array_push($statusArr['debug']['messages'], 'Statement successfully prepared @ /ajax/panel.user.edit.php -> INSERT INTO users_actions');
+
+								$temp2 = 'panel_user_edit_'.$_POST['edit'];
+								$temp3 = time();
+								$temp4 = $ipUtil->getIpAddress();
+								$temp5 = ($statusArr['is_success']['is_edited']==true) ? 1 : 0 ;
+
+								$stmt->bind_param("sssss", $_SESSION['u_id'], $temp2, $temp3, $temp4, $temp5);
 
 								if ($stmt->execute()){
 									array_push($statusArr['debug']['messages'], 'Statement successfully executed @ /ajax/panel.user.edit.php -> INSERT INTO users_actions');
 									$statusArr['is_success']['dbinsert_editLog'] = true;
 								} else {
 									array_push($statusArr['debug']['messages'], '/!\ Statement failed to execute @ /ajax/panel.user.edit.php -> INSERT INTO users_actions');
-									array_push($statusArr['debug']['messages'], $stmt->error);
+									(isset($stmt->error)) ? array_push($statusArr['debug']['messages'], $stmt->error) : null ;
 								}
 							} else {
 								array_push($statusArr['debug']['messages'], '/!\ Statement failed to prepare @ /ajax/panel.user.edit.php -> INSERT INTO users_actions');
-								array_push($statusArr['debug']['messages'], $stmt->error);
+								(isset($stmt->error)) ? array_push($statusArr['debug']['messages'], $stmt->error) : null ;
 							}
 //
 // END LOG USER ACTION
