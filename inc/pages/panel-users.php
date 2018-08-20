@@ -410,9 +410,7 @@ function renderUserTable(){
 	});
 
 }
-
 </script>
-
 <style media="all">
 	#users {
 		overflow-x: scroll;
