@@ -138,8 +138,22 @@ if ($userUtil->isLogedIn()){
 							} elseif ( $_POST['edit'] == 'pwd' ) {
 								array_push($statusArr['debug']['messages'], 'Editing: pwd');
 								{
+									$hashpwd = password_hash($_POST['u_pwd'], PASSWORD_DEFAULT);
 
-
+									if ( $stmt = $conn->prepare("UPDATE `users` SET `user_pwd` = ? WHERE user_id = ?") ){
+										array_push($statusArr['debug']['messages'], 'Statement successfully prepared @ /ajax/panel.user.edit.php -> UPDATE user SET user_pwd WHERE id');
+										$stmt->bind_param("ss", $hashpwd, $_POST['u_id']);
+										if ( $stmt->execute() ){
+											array_push($statusArr['debug']['messages'], 'Statement successfully executed @ /ajax/panel.user.edit.php -> UPDATE user SET user_pwd WHERE id');
+											$statusArr['is_success']['is_edited'] = true;
+										} else {
+											array_push($statusArr['debug']['messages'], '/!\ Statement failed to execute @ /ajax/panel.user.edit.php -> UPDATE user SET user_pwd WHERE id');
+											(isset($stmt->error)) ? array_push($statusArr['debug']['messages'], $stmt->error) : null ;
+										}
+									} else {
+										array_push($statusArr['debug']['messages'], '/!\ Prepared statement failed @ /ajax/panel.user.edit.php -> UPDATE user SET user_pwd WHERE id');
+										(isset($stmt->error)) ? array_push($statusArr['debug']['messages'], $stmt->error) : null ;
+									}
 
 								}
 //
