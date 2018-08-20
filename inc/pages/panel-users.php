@@ -184,28 +184,56 @@ function renderUserTable(){
 					console.log("Edit user - process completed");
 				});
 			});
-						$.post(
-							'/ajax/panel.user.delete.php',
-							{
-								id: id
-							},
-							function(json, textStatus) {
 
-							}
+			$('#users').find('input.pwd').on('focusout', function(event) {
+				event.preventDefault();
+
+				let $this = $(this);
+				let $pwd = $this.val();
+				let id = $this.parents('tr').attr('user');
+
+				if ($pwd.length != 0){
+					if ($pwd.length >= 5){
+
+						$.post(
+							'/ajax/panel.user.edit.php',
+							{
+								u_id: id,
+								u_pwd: $pwd,
+								edit: 'pwd'
+							},
+							function(data, textStatus, xhr){}
 						).done(function(data){
 							console.log("***************************************************");
-							console.log("Delete user - post success");
+							console.log("Edit user - post success");
+							if (data.is_success.is_edited == false){
+								M.toast({html: '<i class="material-icons">warning</i>User was not edited (more info in console)'});
+								$this.removeClass('valid').addClass('invalid');
+							} else {
+								M.toast({html: '<i class="material-icons">check</i>Updated user data',classes:'green'});
+								$this.removeClass('invalid').addClass('valid').attr('disabled', true);
+								setTimeout(function(){ $this.removeClass('valid').val(null).attr('disabled', false); }, 2500);
+							}
 							console.log(data);
-							renderUserTable();
 
-						}).fail(function(data){
+						}).fail(function( data ) {
 							console.log("***************************************************");
-							console.log("Delete user - post fail");
-							console.log(data);
+							console.log("Edit user - fail");
 							M.toast({html: '<i class="material-icons">warning</i>Unable to query data from the server'});
+						}).always(function( data ) {
+							console.log('|_ Messages:');
+							data.debug.messages.forEach(function(el){
+								console.log('  |_ '+el);
+							});
+							console.log("Edit user - process completed");
+						});
 
-						}).always(function(data){
-							btn.attr('disabled', false);
+					} else {
+						M.toast({html: '<i class="material-icons">warning</i> Password must be 5+ characters long'});
+					}
+				}
+
+			});
 						});
 					} else if ( !selState ){
 						btn.removeClass('selectedNo');
