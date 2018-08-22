@@ -29,7 +29,7 @@ $statusData = array(
 		'error' => false,
 		'messages' => array()
 	),
-	'data' => null
+	'data' => array()
 );
 
 if (isset($_POST) && !empty($_POST)){
