@@ -33,6 +33,7 @@
         		<ul>
 					<li><a class="grey-text text-lighten-3" target="_blank" href="https://www.spigotmc.org/resources/skinsrestorer.2124/">Spigot page</a></li>
 					<li><a class="grey-text text-lighten-3" target="_blank" href="https://discord.gg/qHVch38">Discord server</a></li>
+					<li><a class="grey-text text-lighten-3" target="_blank" href="https://github.com/skinsrestorer">Organisation repo</a></li>
 					<li><a class="grey-text text-lighten-3" target="_blank" href="https://github.com/Th3Tr0LLeR/SkinsRestorer---Maro">Official Github repo</a></li>
 					<li><a class="grey-text text-lighten-3" target="_blank" href="https://github.com/McLive/SkinsRestorerX">Dev Github repo</a></li>
         		</ul>
