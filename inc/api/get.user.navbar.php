@@ -44,7 +44,7 @@ $data = array(
 			'target' => '_blank',
 			'imgicon' => 'https://skinsrestorer.net/src/_media/icon_GitHub-Mark-Light-32px.png',
 			'class' => 'blue-grey darken-4',
-			'text' => 'Dev Gihub'
+			'text' => 'Dev Github'
 		)
 	)
 );
