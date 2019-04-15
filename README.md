@@ -1,3 +1,4 @@
+# ARCHIVED - CHECK THE [MAIN REPO](https://github.com/aljaxus/net.skinsrestorer)
 # SKINSRESTORER.NET
 Skinsrestorer.net is the official website of one of most downloaded Minecraft plugins - SkinsRestorer.
 At the time of typing this it is the leading plugin in downloads on [spigotmc.org](https://www.spigotmc.org/resources/?order=download_count)
